@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 
 const mergeAndSortIntegers = (responses) => {
   const mergedSet = new Set();
@@ -16,6 +17,7 @@ const App = () => {
     primes: true,
     fibo: true,
     odd: true,
+    random: true,
   });
 
   const [upperLimit, setUpperLimit] = useState('');
@@ -32,6 +34,9 @@ const App = () => {
       }
       if (selectedTypes.odd) {
         urls.push('http://20.244.56.144/numbers/odd');
+      }
+      if (selectedTypes.random) {
+        urls.push('http://20.244.56.144/numbers/rand');
       }
 
       const promises = urls.map(async (url) => {
@@ -69,10 +74,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>Develop Number Management HTTP Microservice</h1>
+      <div className='main'><h1>Develop Number Management HTTP Microservice</h1></div>
       <div>
-        <label>
-          <input
+        <label className='prime'>
+          <input 
             type="checkbox"
             name="primes"
             checked={selectedTypes.primes}
@@ -80,7 +85,7 @@ const App = () => {
           />
           Primes
         </label>
-        <label>
+        <label className='fibo'>
           <input
             type="checkbox"
             name="fibo"
@@ -89,7 +94,7 @@ const App = () => {
           />
           Fibonacci
         </label>
-        <label>
+        <label className='odd'>
           <input
             type="checkbox"
             name="odd"
@@ -98,20 +103,29 @@ const App = () => {
           />
           Odd Numbers
         </label>
+        <label className='random'>
+          <input
+            type="checkbox"
+            name="random"
+            checked={selectedTypes.radom}
+            onChange={handleCheckboxChange}
+          />
+          random numbers
+        </label>
       </div>
       <div>
-        <label>
-          Upper Limit:
-          <input
+        <label className='enter'>
+          <h4>Enter Number:</h4>
+          <input className='input'
             type="number"
             value={upperLimit}
             onChange={handleUpperLimitChange}
           />
         </label>
       </div>
-      <ul>
+      <ul className='bartan'>
         {mergedIntegers.map((integer) => (
-          <li key={integer}>{integer}</li>
+          <li className='ans' key={integer}>{integer}</li>
         ))}
       </ul>
     </div>
